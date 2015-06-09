@@ -7,10 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
-      <%= link_to "Флэшкарточкер", "#", :class => "navbar-brand" %>
+      <%= link_to "Флэшкарточкер", "#", class: "navbar-brand" %>
       <div>
         <ul class="nav pull-right navbar-nav">
           <li><%= link_to "Все карточки", '#' %></li>
@@ -19,10 +18,8 @@
       </div>
     </div>
   </nav>
-
   <section id="container">
     <%= yield %>
   </section>
-
 </body>
 </html>
