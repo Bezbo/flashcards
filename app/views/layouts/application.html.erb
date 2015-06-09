@@ -8,18 +8,20 @@
 </head>
 <body>
 
-  <section id="container">
-    <header class="clearfix">
-      <h1>Флэшкарточкер</h1>
-      <ul class="navigation-links">
-        <li><%= link_to "Все карточки", "#" %></li>
-        <li><%= link_to "Добавить карточку", "#" %></li>
-      </ul>
-    </header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <%= link_to "Флэшкарточкер", "#", :class => "navbar-brand" %>
+      <div>
+        <ul class="nav pull-right navbar-nav">
+          <li><%= link_to "Все карточки", '#' %></li>
+          <li><%= link_to "Добавить карточку", '#' %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <section>
-      <%= yield %>
-    </section>
+  <section id="container">
+    <%= yield %>
   </section>
 
 </body>
