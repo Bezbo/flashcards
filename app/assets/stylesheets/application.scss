@@ -15,28 +15,24 @@
 #container {
   margin: 48px auto;
   width: 960px;
-}
-
-#container > section {
-  clear: both;
-}
-
-#container > header {
-  margin-bottom: 46px;
-}
-
-#container > header > h1 {
-  float: left;
-  margin: 0;
+  section {
+    clear: both;
+  }
+  header {
+    margin-bottom: 46px;
+    h1 {
+      float: left;
+      margin: 0;
+    }
+  }
 }
 
 .navigation-links {
   float: right;
-}
-
-.navigation-links li {
-  display: inline-block;
-  margin: 0 16px;
+  li {
+    display: inline-block;
+    margin: 0 16px;
+  }
 }
 
 /* MISC */
