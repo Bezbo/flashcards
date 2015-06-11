@@ -1,4 +1,4 @@
-<h2>Все карточки</h2>
+<h3>Все карточки</h3>
 
 <% @cards.each do |card| %>
   <ul>
@@ -6,6 +6,8 @@
       <%= card.original_text %> |
       <%= card.translated_text %> |
       <%= card.review_date.strftime("%d/%m/%Y") %>
+      <%= link_to "редактировать", edit_card_path(card) %> |
+      <%= link_to "удалить", card, method: :delete, data: { confirm: "Удалить?" } %>
     </li>
   </ul>
 <% end %>
