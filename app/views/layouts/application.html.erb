@@ -19,6 +19,9 @@
     </div>
   </nav>
   <section id="container">
+    <% flash.each do |type, msg| %>
+      <%= content_tag(:div, msg, class: "alert alert-#{type}") %>
+    <% end %>
     <%= yield %>
   </section>
 </body>

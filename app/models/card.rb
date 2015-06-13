@@ -4,6 +4,7 @@ class Card < ActiveRecord::Base
             :review_date, presence: true
   validate :check_original_and_translated_texts
   before_create :set_default_review_date
+  scope :for_review, -> { where("review_date <= ?", Date.today) }
 
   def check_original_and_translated_texts
     if original_text.mb_chars.downcase.strip == translated_text.mb_chars.downcase.strip
@@ -13,5 +14,13 @@ class Card < ActiveRecord::Base
 
   def set_default_review_date
     self.review_date = 3.days.from_now
+  end
+
+  def compare_translation(input)
+    if original_text.mb_chars.downcase.strip == input.mb_chars.downcase.strip
+      update_attributes(review_date: 3.days.from_now)
+    else
+      return false
+    end
   end
 end
