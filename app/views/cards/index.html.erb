@@ -1,13 +1,24 @@
 <h3>Все карточки</h3>
 
-<% @cards.each do |card| %>
-  <ul>
-    <li>
-      <%= card.original_text %> |
-      <%= card.translated_text %> |
-      <%= card.review_date.strftime("%d/%m/%Y") %>
-      <%= link_to "редактировать", edit_card_path(card) %> |
-      <%= link_to "удалить", card, method: :delete, data: { confirm: "Удалить?" } %>
-    </li>
-  </ul>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Оригинал</th>
+      <th>Перевод</th>
+      <th>Дата пересмотра</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cards.each do |card| %>
+      <tr>
+        <td><%= card.original_text %></td>
+        <td><%= card.translated_text %></td>
+        <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to "редактировать", edit_card_path(card) %></td>
+        <td><%= link_to "удалить", card, method: :delete, data: { confirm: "Удалить?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
