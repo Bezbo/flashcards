@@ -1,12 +1,1 @@
 <h3>Первый в мире удобный менеджер флеш-карточек. Именно так.</h3>
-
-<% if @random_card %>
-  <h4><%= @random_card.translated_text %></h4>
-  <%= simple_form_for :translation_matching, url: translation_matching_path, method: :put do |f| %>
-        <%= f.input :input %>
-        <%= f.hidden_field :card_id, value: @random_card.id %>
-        <%= f.button :submit, "Правильно?" %>
-  <% end %>
-<% else %>
-  <h4>На сегодня карточек нет</h4>
-<% end %>

@@ -7,7 +7,7 @@ class Card < ActiveRecord::Base
   scope :for_review, -> { where("review_date <= ?", Date.today) }
 
   def check_original_and_translated_texts
-    if original_text.mb_chars.downcase.strip == translated_text.mb_chars.downcase.strip
+    if strip_downcase(original_text) == strip_downcase(translated_text)
       errors.add(:translated_text, "не может быть равен оригиналу")
     end
   end
@@ -17,10 +17,14 @@ class Card < ActiveRecord::Base
   end
 
   def compare_translation(input)
-    if original_text.mb_chars.downcase.strip == input.mb_chars.downcase.strip
+    if strip_downcase(original_text) == strip_downcase(input)
       update_attributes(review_date: 3.days.from_now)
     else
       return false
     end
+  end
+
+  def strip_downcase(text)
+    text.mb_chars.downcase.strip
   end
 end
