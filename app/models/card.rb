@@ -13,12 +13,12 @@ class Card < ActiveRecord::Base
   end
 
   def set_default_review_date
-    self.review_date = 3.days.from_now
+    self.review_date = Date.today + 3.days
   end
 
   def compare_translation(input)
     if strip_downcase(original_text) == strip_downcase(input)
-      update_attributes(review_date: 3.days.from_now)
+      update_attributes(review_date: Date.today + 3.days)
     else
       return false
     end
