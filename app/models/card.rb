@@ -2,6 +2,7 @@ class Card < ActiveRecord::Base
   belongs_to :user
   validates :original_text,
             :translated_text,
+            :user_id,
             :review_date, presence: true
   validate :check_original_and_translated_texts
   before_create :set_default_review_date
