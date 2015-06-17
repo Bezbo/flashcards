@@ -1,9 +1,7 @@
 require "rails_helper"
 
 describe Card do
-  let(:card) { Card.create(original_text: "original_text",
-                           translated_text: "translated_text",
-                           review_date: "2000-01-01") }
+  let(:card) { FactoryGirl.create(:card) }
 
   it "is valid with proper parameters" do
     expect(card).to be_valid

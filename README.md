@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/Bezbo/flashcards.png)](https://travis-ci.org/Bezbo/flashcards)
