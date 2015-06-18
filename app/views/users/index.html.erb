@@ -1,0 +1,20 @@
+<h3>Все пользователи</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= link_to "редактировать", edit_user_path(user) %> |
+        <%= link_to "удалить", user, method: :delete, data: { confirm: "Удалить?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

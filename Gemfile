@@ -31,6 +31,8 @@ gem 'simple_form'
 
 gem 'nokogiri'
 
+gem 'sorcery'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

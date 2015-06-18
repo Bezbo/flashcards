@@ -1,6 +1,10 @@
 Flashcards::Application.routes.draw do
   resources :cards
+  resources :users
   resources :reviews, only: [:new, :create]
+  resources :user_sessions, only: [:new, :create, :destroy]
+  get 'login' => 'user_sessions#new', as: :login
+  post 'logout' => 'user_sessions#destroy', as: :logout
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
