@@ -12,5 +12,6 @@ index.take(15).each do |word|
   translated_text = word.at_css("td:nth-child(2)").text
   Card.create(original_text: original_text,
               translated_text: translated_text,
-              review_date: Time.now)
+              user_id: 9001,
+              review_date: Date.today)
 end
