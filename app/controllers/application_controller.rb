@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated
     redirect_to login_path
-    flash[:warning] = "Please login first"
+    flash[:warning] = "Необходима авторизация"
   end
 end
