@@ -3,6 +3,7 @@ class UserSessionsController < ApplicationController
 
   def new
     @user = User.new
+    redirect_to root_path if current_user
   end
 
   def create
