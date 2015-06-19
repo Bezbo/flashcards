@@ -4,7 +4,7 @@ include SignInHelper
 feature "Review" do
   let(:card) { FactoryGirl.create(:card, user_id: user.id) }
   let(:user) { FactoryGirl.create(:user) }
-  before { sign_in }
+  before { sign_in(user) }
 
   context "if card for review present" do
     before { card.update_attributes(review_date: Date.today - 10.days) }
