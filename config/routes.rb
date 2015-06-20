@@ -6,8 +6,8 @@ Flashcards::Application.routes.draw do
   post "oauth/callback" => "oauths#callback"
   get "oauth/callback" => "oauths#callback"
   get "oauth/:provider" => "oauths#oauth", as: :auth_at_provider
-  get 'login' => 'user_sessions#new', as: :login
-  post 'logout' => 'user_sessions#destroy', as: :logout
+  get "login" => 'user_sessions#new', as: :login
+  post "logout" => 'user_sessions#destroy', as: :logout
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
