@@ -27,7 +27,7 @@ describe "sign up" do
     before { sign_up }
 
     scenario "sign up link is not present" do
-      expect(page).not_to have_content("Регистрация")abstract
+      expect(page).not_to have_content("Регистрация")
     end
 
     scenario "sign out link is present" do
