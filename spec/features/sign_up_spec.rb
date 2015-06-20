@@ -30,7 +30,7 @@ describe "sign up" do
       expect(page).not_to have_content("Регистрация")
     end
 
-    scenario "sign out lin is present" do
+    scenario "sign out link is present" do
       expect(page).to have_content("Выход")
     end
 
