@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
   belongs_to :user
-  has_attached_file :image, :styles => { :medium => "360x360>" }
+  has_attached_file :image, styles: { medium: "360x360>" }
   validates :original_text,
             :translated_text,
             :user_id,
