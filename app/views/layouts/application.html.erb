@@ -15,6 +15,13 @@
           <li><%= link_to "Повторить карточки", new_review_path %></li>
           <li><%= link_to "Все карточки", cards_path %></li>
           <li><%= link_to "Добавить карточку", new_card_path %></li>
+          <% if current_user %>
+            <li><%= link_to "Профиль", profile_path %></li>
+            <li><%= link_to "Выход", :logout, method: :post %></li>
+          <% else %>
+            <li><%= link_to "Регистрация", new_registration_path %></li>
+            <li><%= link_to "Вход", :login %></li>
+          <% end %>
         </ul>
       </div>
     </div>

@@ -1,7 +1,18 @@
 require "rails_helper"
+include SignInHelper
 
 feature "Review" do
-  let(:card) { FactoryGirl.create(:card) }
+  let(:card) { FactoryGirl.create(:card, user_id: user.id) }
+  let(:another_card) { FactoryGirl.create(:card, user_id: another_user.id) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:another_user) { FactoryGirl.create(:user, email: "another@example.com") }
+  before { sign_in(user) }
+
+  scenario "user can review only own card" do
+    another_card.update_attributes(review_date: Date.today - 10.days)
+    visit new_review_path
+    expect(page).to have_content("На сегодня карточек нет")
+  end
 
   context "if card for review present" do
     before { card.update_attributes(review_date: Date.today - 10.days) }

@@ -1,10 +1,10 @@
 class ReviewsController < ApplicationController
   def new
-    @random_card = Card.for_review.order("RANDOM()").first
+    @random_card = current_user.cards.for_review.order("RANDOM()").first
   end
 
   def create
-    card = Card.find(review_params[:card_id])
+    card = current_user.cards.find(review_params[:card_id])
     if card.compare_translation(review_params[:user_input])
       flash[:success] = "Абсолютно!"
     else
