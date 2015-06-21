@@ -1,8 +1,11 @@
 Flashcards::Application.routes.draw do
   resources :cards
-  resources :users
+  # resources :users
+  resource :profile, only: [:show, :edit, :update]
+  resources :registrations, only: [:new, :create]
   resources :reviews, only: [:new, :create]
   resources :user_sessions, only: [:new, :create, :destroy]
+
   post "oauth/callback" => "oauths#callback"
   get "oauth/callback" => "oauths#callback"
   get "oauth/:provider" => "oauths#oauth", as: :auth_at_provider

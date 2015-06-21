@@ -123,9 +123,9 @@ Rails.application.config.sorcery.configure do |config|
   # config.facebook.display = "page"
   # config.facebook.api_version = "v2.2"
   #
-  config.github.key = "583f8b8d2169aae8a32a"
-  config.github.secret = "04edef1108c33ef2603e1861691070e6008e3fac"
-  config.github.callback_url = "http://localhost:3000/oauth/callback?provider=github"
+  config.github.key = ENV["github_key"]
+  config.github.secret = ENV["github_secret"]
+  config.github.callback_url = ENV["github_callback_url"]
   config.github.user_info_mapping = {email: "name"}
   #
   # config.google.key = ""

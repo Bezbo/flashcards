@@ -1,0 +1,9 @@
+<h3>Профиль</h3>
+
+Email: <%= current_user.email %>
+<br/>
+Количество карточек: <%= current_user.cards.count %>
+<br/>
+<div>
+  <%= link_to "Редактировать", edit_profile_path, class: "btn btn-default" %>
+</div>
