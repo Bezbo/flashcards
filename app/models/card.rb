@@ -1,10 +1,12 @@
 class Card < ActiveRecord::Base
   belongs_to :user
+  has_attached_file :image, styles: { medium: "360x360>" }
   validates :original_text,
             :translated_text,
             :user_id,
             :review_date, presence: true
   validate :check_original_and_translated_texts
+  validates_attachment_file_name :image, matches: [/png\Z/, /jpe?g\Z/]
   before_create :set_default_review_date
   scope :for_review, -> { where("review_date <= ?", Date.today) }
 
