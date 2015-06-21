@@ -16,8 +16,11 @@
         <td><%= card.original_text %></td>
         <td><%= card.translated_text %></td>
         <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to "редактировать", edit_card_path(card) %></td>
-        <td><%= link_to "удалить", card, method: :delete, data: { confirm: "Удалить?" } %></td>
+        <td><%= link_to "редактировать", edit_card_path(card),
+                                         class: "btn btn-default" %></td>
+        <td><%= link_to "удалить", card, method: :delete,
+                                         data: { confirm: "Удалить?" },
+                                         class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>

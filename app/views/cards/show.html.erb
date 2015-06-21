@@ -1,5 +1,38 @@
 <h3>Флэшкарточка</h3>
 
-<%= @card.original_text %> |
-<%= @card.translated_text %> |
-<%= @card.review_date.strftime("%d/%m/%Y") %>
+<table>
+  <tr>
+    <th>Изображение</th>
+  </tr>
+  <tr>
+    <td><%= image_tag @card.image.url(:medium) %></td>
+  </tr>
+</table>
+
+<table class="table-condensed">
+  <tr>
+    <td><b>Оригинал:</b></td>
+    <td><%= @card.original_text %></td>
+  </tr>
+  <tr>
+    <td><b>Перевод:</b></td>
+    <td><%= @card.translated_text %></td>
+  </tr>
+  <tr>
+    <td><b>Дата пересмотра</b></td>
+    <td><%= @card.review_date.strftime("%d/%m/%Y") %></td>
+  </tr>
+  <tr>
+    <td>
+      <%= link_to "редактировать", edit_card_path(@card),
+                                   class: "btn btn-default" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= link_to "удалить", @card, method: :delete,
+                                    data: { confirm: "Удалить?" },
+                                    class: "btn btn-default" %>
+    </td>
+  </tr>
+</table>
