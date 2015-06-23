@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Card do
-  let(:card) { FactoryGirl.create(:card) }
+  let(:card) { create(:card) }
 
   it "is valid with proper parameters" do
     expect(card).to be_valid

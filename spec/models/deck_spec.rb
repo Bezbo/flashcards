@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe Deck do
-  let(:deck) { FactoryGirl.create(:deck) }
+  let(:deck) { create(:deck) }
 
-  it "is validwith proper parameters" do
+  it "is valid with proper parameters" do
     expect(deck).to be_valid
   end
 

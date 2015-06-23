@@ -2,15 +2,14 @@ require "rails_helper"
 include SignInHelper
 
 feature "Review" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:card) { FactoryGirl.create(:card, user_id: user.id) }
-  let(:current_deck) { FactoryGirl.create(:deck, user_id: user.id) }
-  let(:card_from_current_deck) {
-    FactoryGirl.create(:card, translated_text: "current_deck",
-                              deck_id: current_deck.id,
-                              user_id: user.id) }
-  let(:another_card) { FactoryGirl.create(:card, user_id: another_user.id) }
-  let(:another_user) { FactoryGirl.create(:user, email: "another@example.com") }
+  let(:user) { create(:user) }
+  let(:card) { create(:card, user_id: user.id) }
+  let(:current_deck) { create(:deck, user_id: user.id) }
+  let(:card_from_current_deck) { create(:card, translated_text: "current_deck",
+                                               deck_id: current_deck.id,
+                                               user_id: user.id) }
+  let(:another_card) { create(:card, user_id: another_user.id) }
+  let(:another_user) { create(:user, email: "another@example.com") }
   before { sign_in(user) }
 
   scenario "user can review only own card" do
