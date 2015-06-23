@@ -44,7 +44,8 @@ class CardsController < ApplicationController
     params.require(:card).permit(:original_text,
                                  :translated_text,
                                  :review_date,
-                                 :image)
+                                 :image,
+                                 :deck_id)
   end
 
   def load_card

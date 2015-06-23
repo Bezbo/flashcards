@@ -1,6 +1,10 @@
 class ReviewsController < ApplicationController
   def new
-    @random_card = current_user.cards.for_review.order("RANDOM()").first
+    if current_deck.present?
+      @random_card = current_deck.cards.for_review.order("RANDOM()").first
+    else
+      @random_card = current_user.cards.for_review.order("RANDOM()").first
+    end
   end
 
   def create
@@ -11,6 +15,10 @@ class ReviewsController < ApplicationController
       flash[:warning] = "Конечно же нет!"
     end
     redirect_to new_review_path
+  end
+
+  def current_deck
+    current_user.decks.where("id = ?", current_user.current_deck_id).first
   end
 
   private

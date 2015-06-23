@@ -15,6 +15,7 @@
           <li><%= link_to "Повторить карточки", new_review_path %></li>
           <li><%= link_to "Все карточки", cards_path %></li>
           <li><%= link_to "Добавить карточку", new_card_path %></li>
+          <li><%= link_to "Колоды", decks_path %></li>
           <% if current_user %>
             <li><%= link_to "Профиль", profile_path %></li>
             <li><%= link_to "Выход", :logout, method: :post %></li>

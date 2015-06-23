@@ -1,9 +1,9 @@
 <h3>Профиль</h3>
 
 Email: <%= current_user.email %>
-<br/>
+<br>
 Количество карточек: <%= current_user.cards.count %>
-<br/>
-<div>
-  <%= link_to "Редактировать", edit_profile_path, class: "btn btn-default" %>
-</div>
+<br>
+Количество колод: <%= current_user.decks.count %>
+<br>
+<%= link_to "Редактировать", edit_profile_path, class: "btn btn-default" %>

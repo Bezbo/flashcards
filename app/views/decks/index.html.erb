@@ -1,0 +1,19 @@
+<h3>Все колоды</h3>
+
+<% if @decks.any? %>
+  <table class="table-condensed">
+    <% @decks.each do |deck|%>
+    <tr>
+      <td><%= link_to deck.name, deck_path(deck) %></td>
+      <% if deck.id != current_user.current_deck_id%>
+        <td><%= link_to "Сделать текущей", set_current_deck_path(deck_id: deck.id),
+                                       method: :put, class: "btn btn-default" %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>Вы пока не добавили ни одной колоды.</p>
+<% end %>
+<br>
+<%= link_to "Добавить", new_deck_path, class: "btn btn-default"  %>
