@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :load_deck, only: [:show, :edit, :destroy]
+  before_action :load_deck, only: [:show, :edit, :update, :destroy]
 
   def index
     @decks = current_user.decks.all
@@ -14,6 +14,7 @@ class DecksController < ApplicationController
 
   def create
     @deck = current_user.decks.new(deck_params)
+
     if @deck.save
       redirect_to decks_path
     else

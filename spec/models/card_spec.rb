@@ -22,6 +22,11 @@ describe Card do
     expect(card).not_to be_valid
   end
 
+  it "is invalid without a deck_id" do
+    card.deck_id = nil
+    expect(card).not_to be_valid
+  end
+
   it "is invalid without a review date" do
     card.review_date = nil
     expect(card).not_to be_valid
