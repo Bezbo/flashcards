@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Deck do
   let(:deck) { FactoryGirl.create(:deck) }

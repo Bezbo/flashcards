@@ -13,7 +13,7 @@ Flashcards::Application.routes.draw do
   get "login" => "user_sessions#new"
   post "logout" => "user_sessions#destroy"
 
-  put 'decks' => 'profiles#set_current_deck', as: :set_current_deck
+  put "decks" => "profiles#set_current_deck", as: :set_current_deck
 
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
