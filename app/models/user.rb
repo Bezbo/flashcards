@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :password_confirmation, presence: true, on: :create
   validates :email, uniqueness: true
+
+  def cards_for_review(user)
+    if user.current_deck_id.present?
+      decks.current_deck(user).first.cards.for_review.order("RANDOM()").first
+    else
+      cards.for_review.order("RANDOM()").first
+    end
+  end
 end
