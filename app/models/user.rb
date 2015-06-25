@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   end
   has_many :cards, dependent: :destroy
   has_many :decks, dependent: :destroy
+  has_one  :current_deck, ->(user) { where("id = ?", user.current_deck_id) },
+                                                          class_name: "Deck"
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
   validates :password, length: { minimum: 3 }, on: :create
@@ -13,7 +15,7 @@ class User < ActiveRecord::Base
 
   def cards_for_review(user)
     if user.current_deck_id.present?
-      decks.current_deck(user).first.cards.for_review.order("RANDOM()").first
+      current_deck(user).cards.for_review.order("RANDOM()").first
     else
       cards.for_review.order("RANDOM()").first
     end
