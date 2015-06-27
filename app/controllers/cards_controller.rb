@@ -13,7 +13,9 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = current_user.cards.new(card_params)
+    @deck = found_or_created_deck
+    @card = found_or_created_deck.cards.new(card_params)
+    @card.user_id = current_user.id
 
     if @card.save
       redirect_to @card
@@ -50,5 +52,9 @@ class CardsController < ApplicationController
 
   def load_card
     @card = current_user.cards.find(params[:id])
+  end
+
+  def found_or_created_deck
+    current_user.decks.find_or_create_by(name: params[:deck_name])
   end
 end
