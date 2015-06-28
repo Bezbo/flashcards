@@ -14,7 +14,7 @@ class CardsController < ApplicationController
 
   def create
     @card = found_or_created_deck.cards.new(card_params)
-    @card.user_id = current_user.id
+
 
     if @card.save
       redirect_to @card
@@ -43,11 +43,12 @@ class CardsController < ApplicationController
 
   def card_params
     @deck = found_or_created_deck
+
     params.require(:card).permit(:original_text,
                                  :translated_text,
                                  :review_date,
                                  :image,
-                                 :deck_id)
+                                 :deck_id).merge(user_id: current_user.id)
   end
 
   def load_card
