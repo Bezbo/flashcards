@@ -13,7 +13,6 @@ class CardsController < ApplicationController
   end
 
   def create
-    @deck = found_or_created_deck
     @card = found_or_created_deck.cards.new(card_params)
     @card.user_id = current_user.id
 
@@ -43,6 +42,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
+    @deck = found_or_created_deck
     params.require(:card).permit(:original_text,
                                  :translated_text,
                                  :review_date,

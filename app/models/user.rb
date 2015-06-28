@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, on: :create
   validates :email, uniqueness: true
 
-  def cards_for_review(user)
-    if user.current_deck
-      current_deck(user).cards.for_review.first
+  def cards_for_review
+    if current_deck
+      current_deck.cards.for_review.first
     else
       cards.for_review.first
     end
