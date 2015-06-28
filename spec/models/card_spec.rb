@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Card do
-  let(:card) { FactoryGirl.create(:card) }
+  let(:card) { create(:card) }
 
   it "is valid with proper parameters" do
     expect(card).to be_valid
@@ -19,6 +19,11 @@ describe Card do
 
   it "is invalid without a user_id" do
     card.user_id = nil
+    expect(card).not_to be_valid
+  end
+
+  it "is invalid without a deck_id" do
+    card.deck_id = nil
     expect(card).not_to be_valid
   end
 

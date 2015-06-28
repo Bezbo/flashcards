@@ -1,5 +1,6 @@
 Flashcards::Application.routes.draw do
   resources :cards
+  resources :decks
   resource  :profile,       only: [:show, :edit, :update]
   resources :registrations, only: [:new, :create]
   resources :reviews,       only: [:new, :create]
@@ -11,6 +12,8 @@ Flashcards::Application.routes.draw do
 
   get "login" => "user_sessions#new"
   post "logout" => "user_sessions#destroy"
+
+  put "decks" => "profiles#set_current_deck", as: :set_current_deck
 
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe User do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:invalid_user) { FactoryGirl.build(:user) }
+  let(:user) { create(:user) }
+  let(:invalid_user) { build(:user) }
 
   it "is valid with proper parameters" do
     expect(user).to be_valid
