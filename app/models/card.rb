@@ -50,14 +50,14 @@ class Card < ActiveRecord::Base
                     when 5 then 1.months
                     end
     update_attributes(review_date: Time.now + time_by_stage, try: 1)
-    if self.stage < 5
-      update_attributes(stage: self.stage + 1)
+    if stage < 5
+      update_attributes(stage: stage + 1)
     end
   end
 
   def set_tries
-    update_attributes(try: self.try + 1)
-    if self.try > 3
+    update_attributes(try: try + 1)
+    if try > 3
       update_attributes(try: 1, stage: 1, review_date: Time.now + 12.hours)
     end
   end
