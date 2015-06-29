@@ -11,48 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622161306) do
+ActiveRecord::Schema.define(version: 20150629190231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "authentications", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
+  create_table "authentications", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.string   "provider",   limit: 255, null: false
+    t.string   "uid",        limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid", using: :btree
 
-  create_table "cards", force: true do |t|
+  create_table "cards", force: :cascade do |t|
     t.text     "original_text"
     t.text     "translated_text"
-    t.date     "review_date"
+    t.datetime "review_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",            null: false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
+    t.integer  "user_id",                                    null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "deck_id",            null: false
+    t.integer  "deck_id",                                    null: false
+    t.integer  "stage",                          default: 1, null: false
+    t.integer  "try",                            default: 1, null: false
   end
 
-  create_table "decks", force: true do |t|
-    t.string   "name"
-    t.integer  "user_id",    null: false
+  create_table "decks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "crypted_password"
-    t.string   "salt"
+    t.string   "crypted_password", limit: 255
+    t.string   "salt",             limit: 255
     t.integer  "current_deck_id"
   end
 

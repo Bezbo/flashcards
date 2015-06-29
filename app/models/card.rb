@@ -15,7 +15,7 @@ class Card < ActiveRecord::Base
   before_create :set_default_review_date
 
   scope :for_review, -> {
-    where("review_date <= ?", Date.today).order("RANDOM()") }
+    where("review_date <= ?", Time.now).order("RANDOM()") }
 
   def check_original_and_translated_texts
     if strip_downcase(original_text) == strip_downcase(translated_text)
@@ -24,18 +24,41 @@ class Card < ActiveRecord::Base
   end
 
   def set_default_review_date
-    self.review_date = Date.today + 3.days
+    self.review_date = Time.now
   end
 
   def compare_translation(input)
     if strip_downcase(original_text) == strip_downcase(input)
-      update_attributes(review_date: Date.today + 3.days)
+      set_review_date_by_stage
+      return true
     else
+      set_tries
       return false
     end
   end
 
   def strip_downcase(text)
     text.mb_chars.downcase.strip
+  end
+
+  def set_review_date_by_stage
+    time_by_stage = case stage
+                    when 1 then 12.hours
+                    when 2 then 3.days
+                    when 3 then 1.weeks
+                    when 4 then 2.weeks
+                    when 5 then 1.months
+                    end
+    update_attributes(review_date: Time.now + time_by_stage, try: 1)
+    if self.stage < 5
+      update_attributes(stage: self.stage + 1)
+    end
+  end
+
+  def set_tries
+    update_attributes(try: self.try + 1)
+    if self.try > 3
+      update_attributes(try: 1, stage: 1, review_date: Time.now + 12.hours)
+    end
   end
 end

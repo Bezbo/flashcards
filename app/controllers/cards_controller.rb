@@ -15,7 +15,6 @@ class CardsController < ApplicationController
   def create
     @card = found_or_created_deck.cards.new(card_params)
 
-
     if @card.save
       redirect_to @card
     else
