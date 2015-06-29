@@ -55,7 +55,7 @@ feature "Review" do
   end
 
   context "if card for review not present" do
-    before { card.review_date = Date.today + 10.days }
+    before { card.update_attributes(review_date: Time.now + 10.days) }
 
     scenario "show message" do
       visit new_review_path
