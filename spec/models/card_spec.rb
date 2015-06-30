@@ -72,14 +72,14 @@ describe Card do
       expect(card.review_date).to eq(Date.today - 10.days)
     end
 
-    it "update tries if false" do
+    it "update attempts if false" do
       card.compare_translation("invalid_text")
-      expect(card.try).to eq(2)
+      expect(card.attempt).to eq(2)
     end
 
-    it "doesn't update tries if true" do
+    it "doesn't update attempts if true" do
       card.compare_translation(card.original_text)
-      expect(card.try).to eq(1)
+      expect(card.attempt).to eq(1)
     end
   end
 
@@ -107,20 +107,20 @@ describe Card do
     end
   end
 
-  describe ".set_tries" do
-    context "if tries less then 3" do
-      it "adds 1 to tries" do
-        card.set_tries
-        expect(card.try).to eq(2)
+  describe ".set_attempts" do
+    context "if attempts less then 3" do
+      it "adds 1 to attempts" do
+        card.set_attempts
+        expect(card.attempt).to eq(2)
       end
     end
 
-    context "if tries more then 3" do
-      before { card.update_attributes(try: 3) }
-      before { card.set_tries }
+    context "if attempts more then 3" do
+      before { card.update_attributes(attempt: 3) }
+      before { card.set_attempts }
 
-      it "sets tries to 1" do
-        expect(card.try).to eq(1)
+      it "sets attempts to 1" do
+        expect(card.attempt).to eq(1)
       end
 
       it "sets stage to 1" do

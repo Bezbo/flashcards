@@ -32,7 +32,7 @@ class Card < ActiveRecord::Base
       set_review_date_by_stage
       return true
     else
-      set_tries
+      set_attempts
       return false
     end
   end
@@ -49,16 +49,21 @@ class Card < ActiveRecord::Base
                     when 4 then 2.weeks
                     when 5 then 1.months
                     end
-    update_attributes(review_date: Time.now + time_by_stage, try: 1)
     if stage < 5
-      update_attributes(stage: stage + 1)
+      update_attributes(review_date: Time.now + time_by_stage,
+                        attempt: 1,
+                        stage: stage + 1)
+    else
+      update_attributes(review_date: Time.now + time_by_stage, attempt: 1)
     end
   end
 
-  def set_tries
-    update_attributes(try: try + 1)
-    if try > 3
-      update_attributes(try: 1, stage: 1, review_date: Time.now + 12.hours)
+  def set_attempts
+
+    if attempt < 3
+      update_attributes(attempt: attempt + 1)
+    else
+      update_attributes(attempt: 1, stage: 1, review_date: Time.now + 12.hours)
     end
   end
 end
