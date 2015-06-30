@@ -49,21 +49,22 @@ class Card < ActiveRecord::Base
                     when 4 then 2.weeks
                     when 5 then 1.months
                     end
+    new_review_attributes = { review_date: Time.now + time_by_stage,
+                              attempt: 1 }
     if stage < 5
-      update_attributes(review_date: Time.now + time_by_stage,
-                        attempt: 1,
-                        stage: stage + 1)
+      update_attributes(new_review_attributes.merge(stage: stage + 1))
     else
-      update_attributes(review_date: Time.now + time_by_stage, attempt: 1)
+      update_attributes(new_review_attributes)
     end
   end
 
   def set_attempts
-
+    new_review_attributes = { attempt: attempt + 1 }
     if attempt < 3
-      update_attributes(attempt: attempt + 1)
+      update_attributes(new_review_attributes)
     else
-      update_attributes(attempt: 1, stage: 1, review_date: Time.now + 12.hours)
+      update_attributes(new_review_attributes.
+        merge(attempt: 1, stage: 1, review_date: Time.now + 12.hours))
     end
   end
 end
