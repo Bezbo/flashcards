@@ -38,7 +38,8 @@ describe Card do
   end
 
   it "sets default review date" do
-    expect(card.review_date).to eq(Date.today + 3.days)
+    expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
+      to eq(Time.zone.now.strftime("%Y-%m-%d %H:%M"))
   end
 
   it ".strip_downcase" do
@@ -62,12 +63,74 @@ describe Card do
 
     it "updates date if true" do
       card.compare_translation(card.original_text)
-      expect(card.review_date).to eq(Date.today + 3.days)
+      expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
+        to eq((Time.zone.now + 12.hours).strftime("%Y-%m-%d %H:%M"))
     end
 
     it "doesn't update date if false" do
       card.compare_translation("invalid_text")
       expect(card.review_date).to eq(Date.today - 10.days)
+    end
+
+    it "update attempts if false" do
+      card.compare_translation("invalid_text")
+      expect(card.attempt).to eq(2)
+    end
+
+    it "doesn't update attempts if true" do
+      card.compare_translation(card.original_text)
+      expect(card.attempt).to eq(1)
+    end
+  end
+
+  describe ".set_review_date_by_stage" do
+    it "sets review date according to stage" do
+      card.update_attributes(stage: 3)
+      card.set_review_date_by_stage
+      expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
+        to eq((Time.zone.now + 1.week).strftime("%Y-%m-%d %H:%M"))
+    end
+
+    context "if stage less then 5" do
+      it "adds 1 to stage" do
+        card.set_review_date_by_stage
+        expect(card.stage).to eq(2)
+      end
+    end
+
+    context "if stage equal 5" do
+      it "doesn't add value to stage" do
+        card.update_attributes(stage: 5)
+        card.set_review_date_by_stage
+        expect(card.stage).to eq(5)
+      end
+    end
+  end
+
+  describe ".set_attempts" do
+    context "if attempts less then 3" do
+      it "adds 1 to attempts" do
+        card.set_attempts
+        expect(card.attempt).to eq(2)
+      end
+    end
+
+    context "if attempts more then 3" do
+      before { card.update_attributes(attempt: 3, stage: 3) }
+      before { card.set_attempts }
+
+      it "sets attempts to 1" do
+        expect(card.attempt).to eq(1)
+      end
+
+      it "sets stage to 1" do
+        expect(card.stage).to eq(1)
+      end
+
+      it "sets review_date to today + 12 hours" do
+        expect(card.review_date.strftime("%Y-%m-%d %H:%M")).
+          to eq((Time.zone.now + 12.hours).strftime("%Y-%m-%d %H:%M"))
+      end
     end
   end
 end
