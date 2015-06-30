@@ -116,7 +116,7 @@ describe Card do
     end
 
     context "if attempts more then 3" do
-      before { card.update_attributes(attempt: 3) }
+      before { card.update_attributes(attempt: 3, stage: 3) }
       before { card.set_attempts }
 
       it "sets attempts to 1" do
