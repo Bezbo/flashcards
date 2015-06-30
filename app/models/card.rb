@@ -14,8 +14,9 @@ class Card < ActiveRecord::Base
 
   before_create :set_default_review_date
 
-  scope :for_review, -> {
-    where("review_date <= ?", Time.now).order("RANDOM()") }
+  scope :for_review, -> do
+    where("review_date <= ?", Time.now).order("RANDOM()")
+  end
 
   def check_original_and_translated_texts
     if strip_downcase(original_text) == strip_downcase(translated_text)
