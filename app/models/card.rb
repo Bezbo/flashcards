@@ -29,12 +29,14 @@ class Card < ActiveRecord::Base
   end
 
   def compare_translation(input)
-    if strip_downcase(original_text) == strip_downcase(input)
+    dl = DamerauLevenshtein
+    distance = dl.distance(strip_downcase(original_text), strip_downcase(input))
+    if distance <= 1
       set_review_date_by_stage
-      return true
+      { state: true, distance: distance }
     else
       set_attempts
-      return false
+      { state: false }
     end
   end
 

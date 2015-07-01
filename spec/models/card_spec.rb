@@ -53,12 +53,12 @@ describe Card do
 
     it "returns true if texts match" do
       a = card.compare_translation(card.original_text)
-      expect(a).to be true
+      expect(a[:state]).to be true
     end
 
     it "returns false if texts not match" do
       a = card.compare_translation("invalid_text")
-      expect(a).to be false
+      expect(a[:state]).to be false
     end
 
     it "updates date if true" do
