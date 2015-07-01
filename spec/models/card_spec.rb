@@ -56,8 +56,18 @@ describe Card do
       expect(a[:state]).to be true
     end
 
+    it "returns true if texts have minor typo" do
+      a = card.compare_translation(card.original_text + "a")
+      expect(a[:state]).to be true
+    end
+
     it "returns false if texts not match" do
       a = card.compare_translation("invalid_text")
+      expect(a[:state]).to be false
+    end
+
+    it "returns false if texts have major typo" do
+      a = card.compare_translation(card.original_text + "aa")
       expect(a[:state]).to be false
     end
 
