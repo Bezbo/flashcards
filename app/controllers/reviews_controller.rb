@@ -1,6 +1,4 @@
 class ReviewsController < ApplicationController
-  include ReviewsHelper
-
   def new
     @random_card = current_user.cards_for_review
   end
@@ -10,7 +8,7 @@ class ReviewsController < ApplicationController
     comparison = card.compare_translation(review_params[:user_input])
 
     if comparison[:state]
-      typo_helper(card, comparison)
+      view_context.typo_helper(card, comparison, review_params)
     else
       flash[:warning] = "Конечно же нет!"
     end
