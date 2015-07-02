@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  include ReviewsHelper
+
   def new
     @random_card = current_user.cards_for_review
   end
@@ -6,15 +8,9 @@ class ReviewsController < ApplicationController
   def create
     card = current_user.cards.find(review_params[:card_id])
     comparison = card.compare_translation(review_params[:user_input])
-    typo = ["Опечатка: #{review_params[:user_input]}",
-            "Оригинал: #{card.original_text}",
-            "Перевод: #{card.translated_text}"]
+
     if comparison[:state]
-      if comparison[:distance] == 0
-        flash[:success] = "Абсолютно!"
-      else
-        flash[:success] = typo.join("<br/>").html_safe
-      end
+      typo_helper(card, comparison)
     else
       flash[:warning] = "Конечно же нет!"
     end

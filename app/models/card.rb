@@ -29,11 +29,11 @@ class Card < ActiveRecord::Base
   end
 
   def compare_translation(input)
-    dl = DamerauLevenshtein
-    distance = dl.distance(strip_downcase(original_text), strip_downcase(input))
-    if distance <= 1
+    typos_count = DamerauLevenshtein.distance(strip_downcase(original_text),
+                                              strip_downcase(input))
+    if typos_count <= 1
       set_review_date_by_stage
-      { state: true, distance: distance }
+      { state: true, typos_count: typos_count }
     else
       set_attempts
       { state: false }

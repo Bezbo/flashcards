@@ -44,31 +44,31 @@ describe Card do
 
   it ".strip_downcase" do
     card.original_text = " КоТ"
-    a = card.strip_downcase(card.original_text)
-    expect(a).to eq("кот")
+    downcased_card_text = card.strip_downcase(card.original_text)
+    expect(downcased_card_text).to eq("кот")
   end
 
   context ".compare_translation" do
     before { card.review_date = Date.today - 10.days }
 
     it "returns true if texts match" do
-      a = card.compare_translation(card.original_text)
-      expect(a[:state]).to be true
+      comparison_result = card.compare_translation(card.original_text)
+      expect(comparison_result[:state]).to be true
     end
 
     it "returns true if texts have minor typo" do
-      a = card.compare_translation(card.original_text + "a")
-      expect(a[:state]).to be true
+      comparison_result = card.compare_translation(card.original_text + "a")
+      expect(comparison_result[:state]).to be true
     end
 
     it "returns false if texts not match" do
-      a = card.compare_translation("invalid_text")
-      expect(a[:state]).to be false
+      comparison_result = card.compare_translation("invalid_text")
+      expect(comparison_result[:state]).to be false
     end
 
     it "returns false if texts have major typo" do
-      a = card.compare_translation(card.original_text + "aa")
-      expect(a[:state]).to be false
+      comparison_result = card.compare_translation(card.original_text + "aa")
+      expect(comparison_result[:state]).to be false
     end
 
     it "updates date if true" do
