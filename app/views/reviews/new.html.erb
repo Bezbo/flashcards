@@ -1,6 +1,5 @@
-<% if session[:comparison_result] %>
-  <%= typo_helper(session[:comparison_result]) %>
-  <% session[:comparison_result] = nil %>
+<% if flash[:typo] %>
+  <%= typo_helper(@comparison_result) %>
 <% end %>
 
 <h3>Повторить карточки</h3>

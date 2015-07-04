@@ -5,20 +5,20 @@ class ReviewsController < ApplicationController
 
   def create
     @card = current_user.cards.find(review_params[:card_id])
-    @comparison = @card.compare_translation(review_params[:user_input])
-
-    if @comparison[:state]
-      if @comparison[:typos_count] == 0
-        flash[:success] = "Абсолютно!"
+    comparison = @card.compare_translation(review_params[:user_input])
+    @comparison_result = { input: review_params[:user_input],
+                           original: @card.original_text,
+                           translate: @card.translated_text }
+    if comparison[:state]
+      if comparison[:typos_count] == 0
+        flash.now[:success] = "Абсолютно!"
       else
-        session[:comparison_result] = { input: review_params[:user_input],
-                                        original: @card.original_text,
-                                        translate: @card.translated_text }
+        flash.now[:typo] = "Опечатка!"
       end
     else
-      flash[:warning] = "Конечно же нет!"
+      flash.now[:warning] = "Конечно же нет!"
     end
-    redirect_to new_review_path
+    render "new"
   end
 
   private
