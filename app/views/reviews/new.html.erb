@@ -1,3 +1,8 @@
+<% if session[:comparison_result] %>
+  <%= typo_helper(session[:comparison_result]) %>
+  <% session[:comparison_result] = nil %>
+<% end %>
+
 <h3>Повторить карточки</h3>
 
 <% if @random_card %>

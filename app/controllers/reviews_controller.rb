@@ -4,11 +4,17 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    card = current_user.cards.find(review_params[:card_id])
-    comparison = card.compare_translation(review_params[:user_input])
+    @card = current_user.cards.find(review_params[:card_id])
+    @comparison = @card.compare_translation(review_params[:user_input])
 
-    if comparison[:state]
-      view_context.typo_helper(card, comparison, review_params)
+    if @comparison[:state]
+      if @comparison[:typos_count] == 0
+        flash[:success] = "Абсолютно!"
+      else
+        session[:comparison_result] = { input: review_params[:user_input],
+                                        original: @card.original_text,
+                                        translate: @card.translated_text }
+      end
     else
       flash[:warning] = "Конечно же нет!"
     end
