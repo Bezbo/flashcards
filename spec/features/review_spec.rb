@@ -32,6 +32,12 @@ feature "Review" do
       expect(page).to have_content("Абсолютно!")
     end
 
+    scenario "misspelled answer" do
+      fill_in "review_user_input", with: card.original_text + "a"
+      click_button "Правильно?"
+      expect(page).to have_content("Опечатка")
+    end
+
     scenario "incorrect answer" do
       fill_in "review_user_input", with: "incorrect_text"
       click_button "Правильно?"

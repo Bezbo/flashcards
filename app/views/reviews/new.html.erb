@@ -1,3 +1,7 @@
+<% if flash[:typo] %>
+  <%= typo_helper(@comparison_result) %>
+<% end %>
+
 <h3>Повторить карточки</h3>
 
 <% if @random_card %>
