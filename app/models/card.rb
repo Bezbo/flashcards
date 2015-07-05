@@ -66,4 +66,13 @@ class Card < ActiveRecord::Base
       review_date: Time.now + 12.hours) if attempt >= 3
     update_attributes(new_review_attributes)
   end
+
+  def self.pending_cards
+    users = User.all
+    users.each do |user|
+      if user.cards.for_review.any?
+        NotificationsMailer.pending_cards(user).deliver
+      end
+    end
+  end
 end
