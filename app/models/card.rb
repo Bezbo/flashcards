@@ -66,4 +66,12 @@ class Card < ActiveRecord::Base
       review_date: Time.now + 12.hours) if attempt >= 3
     update_attributes(new_review_attributes)
   end
+
+  def self.pending_cards
+    users = User.includes(:cards).
+      where("cards.review_date <= ?", Time.now).references(:cards)
+    users.each do |user|
+      NotificationsMailer.pending_cards(user).deliver_now
+    end
+  end
 end

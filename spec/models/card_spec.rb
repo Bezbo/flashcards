@@ -143,4 +143,30 @@ describe Card do
       end
     end
   end
+
+  describe "#pending_cards" do
+    let(:user_with_cards) { create(:user) }
+
+    it "returns users with cards for review" do
+      card.update_attributes(user_id:     user_with_cards.id,
+                             review_date: Time.now - 10.days)
+      expect(Card.pending_cards).to include(user_with_cards)
+    end
+
+    it "doesn't return users without cards for review" do
+      expect(Card.pending_cards).not_to include(user_with_cards)
+    end
+
+    it "sends notification mail to users with cards for review" do
+      card.update_attributes(user_id:     user_with_cards.id,
+                             review_date: Time.now - 10.days)
+      expect { Card.pending_cards }.to change {
+        ActionMailer::Base.deliveries.count }.by(1)
+    end
+
+    it "doesn't send notification mail to users without cards for review" do
+      expect { Card.pending_cards }.to change {
+        ActionMailer::Base.deliveries.count }.by(0)
+    end
+  end
 end
