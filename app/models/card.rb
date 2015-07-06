@@ -71,7 +71,7 @@ class Card < ActiveRecord::Base
     users = User.includes(:cards).
       where("cards.review_date <= ?", Time.now).references(:cards)
     users.each do |user|
-      NotificationsMailer.pending_cards(user).deliver
+      NotificationsMailer.pending_cards(user).deliver_now
     end
   end
 end
