@@ -68,11 +68,10 @@ class Card < ActiveRecord::Base
   end
 
   def self.pending_cards
-    users = User.all
+    users = User.includes(:cards).
+      where("cards.review_date <= ?", Time.now).references(:cards)
     users.each do |user|
-      if user.cards.for_review.any?
-        NotificationsMailer.pending_cards(user).deliver
-      end
+      NotificationsMailer.pending_cards(user).deliver
     end
   end
 end
