@@ -1,7 +1,7 @@
 <%= simple_form_for(card) do |f| %>
   <%= f.input :original_text %>
   <%= f.input :translated_text %>
-  <%= label_tag "Deck name" %>
+  <%= label_tag t("deck") %>
   <%= text_field_tag :deck_name %>
   <%= f.input :image, as: :file %>
   <%= f.input :review_date %>

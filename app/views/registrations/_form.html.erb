@@ -2,5 +2,7 @@
   <%= f.input :email %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
+  <%= f.input :locale, collection: I18n.available_locales,
+                       include_blank: false %>
   <%= f.button :submit %>
 <% end %>

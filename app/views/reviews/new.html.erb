@@ -2,16 +2,16 @@
   <%= typo_helper(@comparison_result) %>
 <% end %>
 
-<h3>Повторить карточки</h3>
+<h3><%= t("review_cards") %></h3>
 
 <% if @random_card %>
   <h4><%= @random_card.translated_text %></h4>
   <%= image_tag @random_card.image.url(:medium) %>
   <%= simple_form_for :review, url: reviews_path do |f| %>
-    <%= f.input :user_input, label: "Перевод" %>
+    <%= f.input :user_input, label: t("translate") %>
     <%= f.hidden_field :card_id, value: @random_card.id %>
-    <%= f.button :submit, "Правильно?" %>
+    <%= f.button :submit, t(".correct") %>
   <% end %>
 <% else %>
-  <h4>На сегодня карточек нет</h4>
+  <h4><%= t(".no_cards") %></h4>
 <% end %>

@@ -11,12 +11,12 @@ class ReviewsController < ApplicationController
                            translate: @card.translated_text }
     if comparison[:state]
       if comparison[:typos_count] == 0
-        flash.now[:success] = "Абсолютно!"
+        flash.now[:success] = t("correct")
       else
-        flash.now[:typo] = "Опечатка!"
+        flash.now[:typo] = t("typo")
       end
     else
-      flash.now[:warning] = "Конечно же нет!"
+      flash.now[:warning] = t("wrong")
     end
     render "new"
   end

@@ -20,7 +20,7 @@ class Card < ActiveRecord::Base
 
   def check_original_and_translated_texts
     if strip_downcase(original_text) == strip_downcase(translated_text)
-      errors.add(:translated_text, "не может быть равен оригиналу")
+      errors.add(:translated_text, t("cant_be_eq"))
     end
   end
 

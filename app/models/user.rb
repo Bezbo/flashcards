@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :password_confirmation, presence: true, on: :create
   validates :email, uniqueness: true
+  validates :locale, presence: true
 
   def cards_for_review
     if current_deck

@@ -1,8 +1,8 @@
-<h3>Флэшкарточка</h3>
+<h3><%= t("card") %></h3>
 
 <table>
   <tr>
-    <th>Изображение</th>
+    <th><%= t("image") %></th>
   </tr>
   <tr>
     <td><%= image_tag @card.image.url(:medium) %></td>
@@ -11,27 +11,27 @@
 
 <table class="table-condensed">
   <tr>
-    <td><b>Оригинал:</b></td>
+    <td><b><%= t("original") %>:</b></td>
     <td><%= @card.original_text %></td>
   </tr>
   <tr>
-    <td><b>Перевод:</b></td>
+    <td><b><%= t("translate") %>:</b></td>
     <td><%= @card.translated_text %></td>
   </tr>
   <tr>
-    <td><b>Дата пересмотра:</b></td>
+    <td><b><%= t("review_date") %>:</b></td>
     <td><%= @card.review_date.strftime("%d/%m/%Y") %></td>
   </tr>
   <tr>
     <td>
-      <%= link_to "Редактировать", edit_card_path(@card),
+      <%= link_to t("edit"), edit_card_path(@card),
                                    class: "btn btn-default" %>
     </td>
   </tr>
   <tr>
     <td>
-      <%= link_to "Удалить", @card, method: :delete,
-                                    data: { confirm: "Удалить?" },
+      <%= link_to t("delete"), @card, method: :delete,
+                                    data: { confirm: t("are_you_sure") },
                                     class: "btn btn-default" %>
     </td>
   </tr>

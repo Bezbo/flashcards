@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
     if @user.save
       login(user_params[:email], user_params[:password])
       redirect_to root_path
-      flash[:success] = "Добро пожаловать"
+      flash[:success] = t("welcome")
     else
       render "new"
     end
@@ -21,6 +21,9 @@ class RegistrationsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email,
+                                 :password,
+                                 :password_confirmation,
+                                 :locale)
   end
 end

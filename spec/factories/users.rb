@@ -4,5 +4,6 @@ FactoryGirl.define do
     password "secret"
     password_confirmation "secret"
     current_deck_id nil
+    locale :en
   end
 end

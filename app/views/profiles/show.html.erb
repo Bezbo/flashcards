@@ -1,9 +1,9 @@
-<h3>Профиль</h3>
+<h3><%= t("profile") %></h3>
 
-Email: <%= current_user.email %>
+<%= t("email") %>: <%= current_user.email %>
 <br>
-Количество карточек: <%= current_user.cards.count %>
+<%= t(".cards_quantity") %>: <%= current_user.cards.count %>
 <br>
-Количество колод: <%= current_user.decks.count %>
+<%= t(".decks_quantity") %>: <%= current_user.decks.count %>
 <br>
-<%= link_to "Редактировать", edit_profile_path, class: "btn btn-default" %>
+<%= link_to t("edit"), edit_profile_path, class: "btn btn-default" %>

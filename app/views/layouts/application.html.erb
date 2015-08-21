@@ -9,19 +9,26 @@
 <body>
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
-      <%= link_to "Флэшкарточкер", root_path, class: "navbar-brand" %>
+      <%= link_to t(".flashcarder"), root_path, class: "navbar-brand" %>
       <div>
         <ul class="nav pull-right navbar-nav">
-          <li><%= link_to "Повторить карточки", new_review_path %></li>
-          <li><%= link_to "Все карточки", cards_path %></li>
-          <li><%= link_to "Добавить карточку", new_card_path %></li>
-          <li><%= link_to "Колоды", decks_path %></li>
+          <li><%= link_to t("review_cards"), new_review_path %></li>
+          <li><%= link_to t("all_cards"), cards_path %></li>
+          <li><%= link_to t("add_card"), new_card_path %></li>
+          <li><%= link_to t("decks"), decks_path %></li>
           <% if current_user %>
-            <li><%= link_to "Профиль", profile_path %></li>
-            <li><%= link_to "Выход", :logout, method: :post %></li>
+            <li><%= link_to t("profile"), profile_path %></li>
+            <li><%= link_to t("signout"), :logout, method: :post %></li>
           <% else %>
-            <li><%= link_to "Регистрация", new_registration_path %></li>
-            <li><%= link_to "Вход", :login %></li>
+            <li><%= link_to t("signup"), new_registration_path %></li>
+            <li><%= link_to t("signin"), :login %></li>
+            <li>
+              <% if I18n.locale == I18n.default_locale %>
+                <%= link_to "ru", url_for(:locale => 'ru') %>
+              <% else %>
+                <%= link_to "en", url_for(:locale => 'en') %>
+              <%end%>
+            </li>
           <% end %>
         </ul>
       </div>

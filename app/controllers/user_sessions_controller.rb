@@ -8,17 +8,17 @@ class UserSessionsController < ApplicationController
 
   def create
     if @user = login(params[:email], params[:password])
-      flash[:success] = "Вход выполнен успешно"
+      flash[:success] = t("login_successful")
       redirect_back_or_to(:root)
     else
-      flash.now[:warning] = "Неверный Email или пароль"
+      flash.now[:warning] = t("invalid_email_or_password")
       render action: 'new'
     end
   end
 
   def destroy
     logout
-    flash[:warning] = "Выход"
+    flash[:warning] = t("logout")
     redirect_to(:root)
   end
 

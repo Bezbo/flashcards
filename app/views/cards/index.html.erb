@@ -1,12 +1,12 @@
-<h3>Все карточки</h3>
+<h3><%= t("all_cards") %></h3>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Оригинал</th>
-      <th>Перевод</th>
-      <th>Колода</th>
-      <th>Дата пересмотра</th>
+      <th><%= t("original") %></th>
+      <th><%= t("translate") %></th>
+      <th><%= t("deck") %></th>
+      <th><%= t("review_date") %></th>
       <th></th>
       <th></th>
     </tr>
@@ -18,10 +18,10 @@
         <td><%= card.translated_text %></td>
         <td><%= card.deck.name %></td>
         <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to "редактировать", edit_card_path(card),
+        <td><%= link_to t("edit"), edit_card_path(card),
                                          class: "btn btn-default" %></td>
-        <td><%= link_to "удалить", card, method: :delete,
-                                         data: { confirm: "Удалить?" },
+        <td><%= link_to t("delete"), card, method: :delete,
+                                         data: { confirm: t("are_you_sure") },
                                          class: "btn btn-default" %></td>
       </tr>
     <% end %>

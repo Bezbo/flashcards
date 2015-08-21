@@ -1,23 +1,107 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  layouts:
+    application:
+      flashcarder: Flashcarder
+  home:
+    index:
+      welcome_message: First convenient flashcard manager in the world. Just so.
+  cards:
+    edit:
+      edit_card: Edit card
+  decks:
+    index:
+      no_decks_yet: You didn't add any deck yet.
+      set_as_current: Set as current
+      add_deck: Add deck
+    show:
+      quantity_of_cards_in_deck: Quantity of cards in deck
+      cards_in_this_deck: Cards in this deck
+    new:
+      new_deck: New deck
+    edit:
+      edit_deck: Edit deck
+  profiles:
+    show:
+      cards_quantity: Cards quantity
+      decks_quantity: Decks quantity
+    edit:
+      edit_profile: Edit profile
+  reviews:
+    new:
+      correct: Correct?
+      no_cards: No cards today.
+  shared:
+    login_via_github: Login via GitHub
+  oauths:
+    callback:
+      login_via_provider_success: "Log in via %{provider.titleize} successful!"
+      login_via_provider_fail: "Fail to log in via %{provider.titleize}!"
+  simple_form:
+    labels:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+        locale: Language
+      profile:
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+        locale: Language
+      deck:
+        name: Deck's name
+      card:
+        original_text: Original text
+        translated_text: Translated text
+        review_date: Review date
+        image: Image
+  helpers:
+    reviews_helper:
+      typo_helper:
+        typo: Typo
+    submit:
+      user:
+        create: Sign up
+        update: Save сhanges
+      deck:
+        create: Add deck
+        update: Save changes
+      card:
+        create: Add card
+        update: Save changes
+  notifications_mailer:
+    pending_cards:
+      time_to_review: It's time to check your cards!
+      cards_are_here: Cards are here
+  signup: Sign up
+  signin: Sign in
+  signout: Sign out
+  profile: Profile
+  email: Email
+  password: Password
+  edit: Edit
+  delete: Delete
+  are_you_sure: Are you sure?
+  login_please: "Log in, please."
+  welcome: Welcome!
+  decks: Decks
+  deck: Deck
+  card: Card
+  image: Image
+  original: Original text
+  translate: Translated text
+  review_date: Review date
+  typo: Typo
+  review_cards: Review cards
+  all_cards: All cards
+  add_card: Add card
+  review_your_cards: Review your cards!
+  login_successful: Login successful!
+  invalid_email_or_password: Invalid email or password!
+  logout: Logout!
+  correct: Correct!
+  typo: Typo!
+  wrong: Wrong!
+  deck_is_selected: Current deck is selected!
+  fail_to_select_deck: Fail to select deck!
+  cant_be_eq: Can't be equal to original

@@ -1,20 +1,23 @@
 Flashcards::Application.routes.draw do
-  resources :cards
-  resources :decks
-  resource  :profile,       only: [:show, :edit, :update]
-  resources :registrations, only: [:new, :create]
-  resources :reviews,       only: [:new, :create]
-  resources :user_sessions, only: [:new, :create, :destroy]
+  scope "(:locale)", locale: /en|ru/ do
+    resources :cards
+    resources :decks
+    resource  :profile,       only: [:show, :edit, :update]
+    resources :registrations, only: [:new, :create]
+    resources :reviews,       only: [:new, :create]
+    resources :user_sessions, only: [:new, :create, :destroy]
 
-  post "oauth/callback" => "oauths#callback"
-  get "oauth/callback" => "oauths#callback"
-  get "oauth/:provider" => "oauths#oauth", as: :auth_at_provider
+    post "oauth/callback" => "oauths#callback"
+    get "oauth/callback" => "oauths#callback"
+    get "oauth/:provider" => "oauths#oauth", as: :auth_at_provider
 
-  get "login" => "user_sessions#new"
-  post "logout" => "user_sessions#destroy"
+    get "login" => "user_sessions#new"
+    post "logout" => "user_sessions#destroy"
 
-  put "decks" => "profiles#set_current_deck", as: :set_current_deck
+    put "decks" => "profiles#set_current_deck", as: :set_current_deck
+  end
 
+  get "/:locale" => "home#index"
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

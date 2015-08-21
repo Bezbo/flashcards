@@ -8,17 +8,17 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if @user = login_from(provider)
-      flash[:success] = "Вход через #{provider.titleize} успешно выполнен!"
+      flash[:success] = t(".login_via_provider_success", provider: provider)
       redirect_to root_path
     else
       begin
         @user = create_from(provider)
         reset_session
         auto_login(@user)
-        flash[:success] = "Вход через #{provider.titleize} успешно выполнен!"
+        flash[:success] = t(".login_via_provider_success", provider: provider)
         redirect_to root_path
       rescue
-        flash[:warning] = "Вход через #{provider.titleize} провален!"
+        flash[:warning] = t(".login_via_provider_fail", provider: provider)
         redirect_to root_path
       end
     end

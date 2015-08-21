@@ -16,9 +16,9 @@ class ProfilesController < ApplicationController
 
   def set_current_deck
     if current_user.update_attributes(current_deck_id: params[:deck_id])
-      flash[:success] = "Основная колода выбрана"
+      flash[:success] = t("deck_is_selected")
     else
-      flash[:warning] = "Выбрать основную колоду не удалось"
+      flash[:warning] = t("fail_to_select_deck")
     end
     redirect_to decks_path
   end
@@ -29,6 +29,7 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(:email,
                                     :password,
                                     :password_confirmation,
-                                    :current_deck_id)
+                                    :current_deck_id,
+                                    :locale)
   end
 end
